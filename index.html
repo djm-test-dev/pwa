@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Moja PWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    manifest.json
+    <meta charset="UTF-8">
+	<tittle>PWA<br></tittle>
+	https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js</script>
+	<style>
+		body{font-family:Arial;text-align:center;margin-top:50px;}
+		button{padding:10px 20px;font-size:16px;}
+		/*Stil za desktop*/
+		body{font-size:18px;}
+		/*Stil za mobilne uređaje*/
+		@media(max-width:600px){
+		body{font-size:14px;}
+		button@width:100%;}
+		}
+	</style>
+    <br>manifest.json
 </head>
 <body>
-    <h1>Dobrodošli u PWA!</h1>
+    <h1 id="poruka">Pozdrav, ovoj je web aplikacija za prijavu incidenata!</h1>
     <button onclick="promeniPoruku()">Klikni me</button>
+
+    <h1>Moja GPS Lokacija</h1>
+    <button onclick="getLocation()">Prikaži lokaciju</button>
+    <p id="output"></p>
+
+
+    <h1>Generisanje QR koda</h1>
+    <input type="text" id="textInput" placeholder="Unesi tekst">
+    <button onclick="generateQR()">Generiši QR kod</button>
+    <div id="qrcode" style="margin-top:20px;"></div>
 
     <script>
         function promeniPoruku() {
@@ -20,5 +43,55 @@
             .then(() => console.log('Service Worker registrovan!'));
         }
     </script>
+
+    <!--  JavaScript kod za preuzimanje GPS lokacije -->
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("output").innerHTML = "Geolokacija nije podržana.";
+            }
+        }
+
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            document.getElementById("output").innerHTML = 
+                `Latitude: ${lat} <br> Longitude: ${lon}`;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Korisnik je odbio zahtev za lokaciju.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Informacija o lokaciji nije dostupna.");
+                    break;
+                case error.TIMEOUT:
+                    alert("Zahtev za lokaciju je istekao.");
+                    break;
+                default:
+                    alert("Nepoznata greška.");
+            }
+        }
+    </script>
+
+
+    <!--  JavaScript kod za generisanje QR koda na osnovu unetog teksta -->
+    <script>
+        function generateQR() {
+            const text = document.getElementById("textInput").value;
+            document.getElementById("qrcode").innerHTML = ""; // očisti prethodni QR
+            new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+
+
 </body>
 </html>
