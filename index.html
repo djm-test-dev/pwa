@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moja PWA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    manifest.json
+</head>
+<body>
+    <h1>Dobrodošli u PWA!</h1>
+    <button onclick="promeniPoruku()">Klikni me</button>
+
+    <script>
+        function promeniPoruku() {
+            document.querySelector('h1').innerText = "Poruka je promenjena!";
+        }
+
+        // Registracija Service Worker-a
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+            .then(() => console.log('Service Worker registrovan!'));
+        }
+    </script>
+</body>
+</html>
