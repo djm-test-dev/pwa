@@ -28,7 +28,7 @@
 
 
     <h1>Generisanje QR koda</h1>
-    <input type="text" id="qrText" placeholder="Unesi tekst ili URL" /><br>
+    <input type="text" id="qrText" placeholder="Unesi tekst ili URL" />
     <button onclick="generateQR()">Generiši QR kod</button>
     <div id="qrcode" style="margin-top:20px;"></div>
 
@@ -81,13 +81,14 @@
     <!--  JavaScript kod za generisanje QR koda na osnovu unetog teksta -->
     <script>
         function generateQR() {
-            const text = document.getElementById("textInput").value;
-            document.getElementById("qrcode").innerHTML = ""; // očisti prethodni QR
-            new QRCode(document.getElementById("qrcode"), {
-                text: text,
-                width: 200,
-                height: 200
-            });
+            const text = document.getElementById("qrText").value;
+		    const qrContainer = document.getElementById("qrcode");
+		    qrContainer.innerHTML = ""; // očisti prethodni QR kod
+    		new QRCode(qrContainer, {
+        		text: text,
+        		width: 200,
+        		height: 200
+   			});
         }
     </script>
 
@@ -97,6 +98,7 @@
 
 </body>
 </html>
+
 
 
 
