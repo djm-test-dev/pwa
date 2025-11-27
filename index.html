@@ -28,17 +28,20 @@
     <h1 id="poruka">Pozdrav, ovoj je web aplikacija za prijavu incidenata!</h1>
     <button onclick="promeniPoruku()">Klikni me</button>
 
-    <h2>Moja GPS Lokacija</h2>
+    <h2><br></h2>
+	<h2>Moja GPS Lokacija</h2>
     <button onclick="getLocation()">Prikaži lokaciju</button>
     <p id="output"></p>
 	<p><br></p>
 
-    <h2>Generisanje QR koda</h2>
+   	<h2><br></h2>
+	<h2>Generisanje QR koda</h2>
 	<input type="text" id="text-input" placeholder="Unesi tekst ili URL link" style="width: 50%; padding: 10px; font-size:16px;"/>
 	<button onclick="generateQR()" style="margin-top:10px; padding:10px 20px;">Generiši QR kod</button>
     <div id="qrcode" style="margin-top:20px;"></div>
 
-    <script>
+	<!--  JavaScript kod za promenu poruke -->
+	<script>
         function promeniPoruku() {
             document.querySelector('h1').innerText = "Poruka je promenjena!";
         }
@@ -84,18 +87,31 @@
         }
     </script>
 
-    <!--  JavaScript kod za generisanje QR koda na osnovu unetog teksta -->
-    <script>
-        function generateQR() {
-            const text = document.getElementById("qrText").value;
-		    const qrContainer = document.getElementById("qrcode");
-		    qrContainer.innerHTML = ""; // očisti prethodni QR kod
-    		new QRCode(qrContainer, {
-        		text: text,
-        		width: 200,
-        		height: 200
-   			});
-        }
+	<!-- QRCode.js biblioteka -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+	<script>
+		let qr;
+
+		function generateQR() {
+			const text = document.getElementById("text-input").value;
+
+			if (!text.trim()) {
+				alert("Unesite tekst ili URL link!");
+				return;
+			}
+
+			// Ako QR već postoji, obriši ga
+			if (qr) {
+				document.getElementById("qrcode").innerHTML = "";
+			}
+
+			qr = new QRCode(document.getElementById("qrcode"), {
+				text: text,
+				width: 256,
+				height: 256
+			});
+		}
     </script>
 
 	<br>
@@ -104,6 +120,7 @@
 
 </body>
 </html>
+
 
 
 
