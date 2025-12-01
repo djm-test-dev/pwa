@@ -1,10 +1,10 @@
 const CACHE_NAME = 'pwa-cache-v0';
 
 const FILES_TO_CACHE = [
-    '/PWA/index.html',
-    '/PWA/manifest.json',
-    '/PWA/icon.png',
-    '/PWA/icon-large.png'
+    '/index.html',
+    '/manifest.json',
+    '/icon.png',
+    '/icon-large.png'
 ];
 
 // Instalacija
@@ -35,5 +35,6 @@ self.addEventListener('fetch', event => {
         .then(response => response || fetch(event.request))
     );
 });
+
 
 
