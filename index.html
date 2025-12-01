@@ -4,8 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
 	<tittle>PWA<br></tittle>
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- iOS ikone i podešavanja (opciono ali preporučeno) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="icon.png">
 	<style>
-		body{font-family:Arial;text-align:center;margin-top:50px;}
+		body{font-family:Arial, sans-serif;text-align:center;margin-top:50px;}
 		button{padding:10px 20px;font-size:16px;}
 		/*Stil za desktop*/
 		body{font-size:18px;}
@@ -15,6 +21,13 @@
 		button@width:100%;}
 		}
 	</style>
+    <style>
+        #myImage {
+            width: auto;
+            height: 100px;
+            margin-top: 10px;
+        }
+    </style>
 	<style>
 	#qrcode img,
 	#qrcode canvas {
@@ -22,29 +35,35 @@
 		margin: 0 auto;
 	}
 	</style>
-	<br>manifest.json
+    <br>
 </head>
 <body>
     <h1 id="poruka">Pozdrav, ovoj je web aplikacija za prijavu incidenata!</h1>
+    <!-- Početna slika -->
+    <img id="myImage" src="white_base.png">
+	<br>
+	<br>
     <button onclick="promeniPoruku()">Klikni me</button>
 
-    <h2><br></h2>
-	<h2>Moja GPS Lokacija</h2>
+	<h2><br></h2>
+    <h2>Moja GPS Lokacija</h2>
     <button onclick="getLocation()">Prikaži lokaciju</button>
     <p id="output"></p>
 	<p><br></p>
 
-   	<h2><br></h2>
+ 	<h2><br></h2>    
 	<h2>Generisanje QR koda</h2>
 	<input type="text" id="text-input" placeholder="Unesi tekst ili URL link" style="width: 50%; padding: 10px; font-size:16px;"/>
 	<button onclick="generateQR()" style="margin-top:10px; padding:10px 20px;">Generiši QR kod</button>
     <div id="qrcode" style="margin-top:40px;"></div>
 
 	<!--  JavaScript kod za promenu poruke -->
-	<script>
+    <script>
         function promeniPoruku() {
-            document.querySelector('h1').innerText = "Poruka je promenjena!";
-        }
+            // Menja teks
+			document.querySelector('h1').innerText = "Poruka je promenjena! Ponovo učitaj stranicu!!!";
+            // Menja sliku
+            document.getElementById("myImage").src = "smiley_tongue.png";        }
 
         // Registracija Service Worker-a
         if ('serviceWorker' in navigator) {
@@ -89,7 +108,7 @@
 
 	<!-- QRCode.js biblioteka -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    
+
 	<script>
 		let qr;
 
@@ -112,7 +131,8 @@
 				height: 256
 			});
 		}
-    </script>
+	</script>
+
 
 	<br>
 	<br>
@@ -120,11 +140,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
