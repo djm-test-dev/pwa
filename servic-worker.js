@@ -1,10 +1,10 @@
 const CACHE_NAME = 'pwa-cache-v0';
 
 const FILES_TO_CACHE = [
-    '/index.html',
-    '/manifest.json',
-    '/icon.png',
-    '/icon-large.png'
+    'https://djm-test-dev.github.io/pwa/index.html',
+    'https://djm-test-dev.github.io/pwa/manifest.json',
+    'https://djm-test-dev.github.io/pwa/icon.png',
+    'https://djm-test-dev.github.io/pwa/icon-large.png'
 ];
 
 // Instalacija
@@ -35,6 +35,7 @@ self.addEventListener('fetch', event => {
         .then(response => response || fetch(event.request))
     );
 });
+
 
 
 
